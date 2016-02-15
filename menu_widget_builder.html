@@ -1,0 +1,174 @@
+<!--
+Jive - Menu Widget
+
+Copyright (c) 2015 Fidelity Investments
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+FILE DESCRIPTION
+This is the HTML Widget code for the Menu widget builder app.
+
+WIDGET DESCRIPTION
+This Jive HTML widget loads in a Jive setup document with a bullet list acting 
+as a table of contents.  This is parsed and formatted into a menu with the top level 
+items as the main menu selections.  The second level items are built into drop-downs 
+of the top level items.
+-->
+<meta name="fidosreg" content="b764a0a9536448345dc227af95e192521d337b5e4c3560c859b89ecd0407004a">
+
+<script src='JQUERY'></script>
+<script>
+
+var jquery_content_id = "0";
+var library_loader_content_id = "0";
+
+var $j = jQuery.noConflict();
+$j("head").append('<scr'+'ipt src="/api/core/v3/attachments/file/' + library_loader_content_id + '/data"></scr'+'ipt>');
+</script>
+<script>
+$j.load_library('bootstrap.css');
+$j.load_library('bootstrap-theme.css');
+$j.load_library('spectrum.css');
+$j.load_library('menu_builder.css');
+$j.load_library('bootstrap.js');
+$j.load_library('spectrum.js');
+$j.load_library('menu_builder.js');
+</script>
+
+<style title="previewMenuStyleSheet" type="text/css">
+</style>
+
+<div id='mainContainer'>
+	<div id='widgetTitle' class='page-header'>
+		<h2>Menu Bar Builder</h2>
+	</div>
+	<div id='startingDiv'>
+		<div id="search_layout">
+			<div class="input-group">
+				<span class="input-group-addon">Title</span> <input id="menuTitle" type="text" class="form-control" placeholder="Enter Title" value="blah"/>
+			</div>
+			<br />
+			<p style='color: #2AABD2;'>Please paste the URL of your Setup Document.</p>
+			<form id="menuInfoScreen" name="menuInfoScreen" onsubmit="return false;">
+				<input id="docURLInput" type="text" placeholder="Enter Document URL" value="https://ribbit.fmr.com/docs/DOC-671412" />
+			</form>
+			<br />
+			<div id='URLStatus' style='color: red;'></div>
+			<br />
+			<button id='nextButton' class='btn btn-info btn-small' onclick='nextButton()' disabled>Next</button>
+		</div>
+	</div>
+	<div id='previewDiv'>
+		<div id='previewMenuContainer'></div>
+		<div id="menuColor" class="btn-group">
+			<div>
+				<button class="btn color_btn btn-white col-xs-3" onclick="createPreview('white')" checked> White</button>
+				<button class="btn color_btn btn color_btn-gray1 col-xs-3" onclick="createPreview('gray1')"> Light Grey</button>
+				<button class="btn color_btn btn-gray2 col-xs-3" onclick="createPreview('gray2')"> Dark Grey</button>
+				<button class="btn color_btn btn-black col-xs-3" onclick="createPreview('black')"> Black</button>
+			</div>
+			<div>
+				<button class="btn color_btn btn-yellow1 col-xs-3" onclick="createPreview('yellow1')"> Pale Yellow</button>
+				<button class="btn color_btn btn-yellow2 col-xs-3" onclick="createPreview('yellow2')"> Light Yellow</button>
+				<button class="btn color_btn btn-yellow3 col-xs-3" onclick="createPreview('yellow3')"> Yellow</button>
+				<button class="btn color_btn btn-yellow4 col-xs-3" onclick="createPreview('yellow4')"> Dark Yellow</button>
+			</div>
+			<div>
+				<button class="btn color_btn btn-orange1 col-xs-3" onclick="createPreview('orange1')"> Pale Orange</button>
+				<button class="btn color_btn btn-orange2 col-xs-3" onclick="createPreview('orange2')"> Light Orange</button>
+				<button class="btn color_btn btn-orange3 col-xs-3" onclick="createPreview('orange3')"> Orange</button>
+				<button class="btn color_btn btn-orange4 col-xs-3" onclick="createPreview('orange4')"> Dark Orange</button>
+			</div>
+			<div>
+				<button class="btn color_btn btn-brown1 col-xs-3" onclick="createPreview('brown1')"> Pale Brown</button>
+				<button class="btn color_btn btn-brown2 col-xs-3" onclick="createPreview('brown2')"> Light Brown</button>
+				<button class="btn color_btn btn-brown3 col-xs-3" onclick="createPreview('brown3')"> Brown</button>
+				<button class="btn color_btn btn-brown4 col-xs-3" onclick="createPreview('brown4')"> Dark Brown</button>
+			</div>
+			<div>
+				<button class="btn color_btn btn-red1 col-xs-3" onclick="createPreview('red1')" > Pale Red</button>
+				<button class="btn color_btn btn-red2 col-xs-3" onclick="createPreview('red2')" > Light Red</button>
+				<button class="btn color_btn btn-red3 col-xs-3" onclick="createPreview('red3')" > Red</button>
+				<button class="btn color_btn btn-red4 col-xs-3" onclick="createPreview('red4')" > Dark Red</button>
+			</div>
+			<div>
+				<button class="btn color_btn btn-purple1 col-xs-3" onclick="createPreview('purple1')"> Pale Purple</button>
+				<button class="btn color_btn btn-purple2 col-xs-3" onclick="createPreview('purple2')"> Light Purple</button>
+				<button class="btn color_btn btn-purple3 col-xs-3" onclick="createPreview('purple3')"> Purple</button>
+				<button class="btn color_btn btn-purple4 col-xs-3" onclick="createPreview('purple4')"> Dark Purple</button>
+			</div>
+			<div>
+				<button class="btn color_btn btn-blue1 col-xs-3" onclick="createPreview('blue1')" > Pale Blue</button>
+				<button class="btn color_btn btn-blue2 col-xs-3" onclick="createPreview('blue2')" > Light Blue</button>
+				<button class="btn color_btn btn-blue3 col-xs-3" onclick="createPreview('blue3')" > Blue</button>
+				<button class="btn color_btn btn-blue4 col-xs-3" onclick="createPreview('blue4')" > Dark Blue</button>
+			</div>
+			<div>
+				<button class="btn color_btn btn-green1 col-xs-3" onclick="createPreview('green1')" > Pale Green</button>
+				<button class="btn color_btn btn-green2 col-xs-3" onclick="createPreview('green2')" > Light Green</button>
+				<button class="btn color_btn btn-green3 col-xs-3" onclick="createPreview('green3')" > Green</button>
+				<button class="btn color_btn btn-green4 col-xs-3" onclick="createPreview('green4')" > Dark Green</button>
+			</div>
+			<label>
+				<br />
+			</label>
+			<form id="form-custom" action="#" method="get" class="form-inline text-center">
+				<div class="form-group col-xs-3">
+					<label for="bd">Default Background</label>
+					<input id='backgroundDefault' style="display: inline; width: 30%;">
+				</div>
+				<div class="form-group col-xs-3">
+					<label for="bh">Active Background</label>
+					<input id='backgroundActive' style="display: inline; width: 30%;">
+				</div>
+				<div class="form-group col-xs-3">
+					<label for="cd">Default Text </label>
+					<input id='textDefault' style="display: inline; width: 30%;">
+				</div>
+				<div class="form-group col-xs-3">
+					<label for="ch">Active Text </label>
+					<input id='textActive' style="display: inline; width: 30%;">
+				</div>
+			</form>
+			<label>
+				<br />
+			</label>
+			<form id="myform">
+				<div class="form-group col-xs-4">
+					<b>Title size </b><input style="display: inline; width: 10%;" type="text" id="titleSize" value="15" readonly/>
+
+					<input style="display: inline;" type="range" min="8" max="32" id="titlesize_slider" value="15"/>
+				</div>
+				<div class="form-group col-xs-4">
+					<b>Menu size </b><input style="display: inline; width: 10%;" type="text" id="menuSize" value="15" readonly/>
+					<input style="display: inline;" type="range" min="8" max="32" id="menusize_slider" value="15"/>
+				</div>
+				<div class="form-group col-xs-4">
+					<b>Sub-menu size </b><input style="display: inline; width: 10%;" type="text" id="submenuSize" value="15" readonly/>
+					<input style="display: inline;" type="range" min="8" max="32" id="submenusize_slider" value="15"/>
+				</div>
+			</form>
+			<br />
+			<button id='preview-next' class='btn btn-info btn-small' onclick="finish()">Next</button>
+			<button id='backstartdiv'  class='btn btn-info btn-small' onclick='backStartDiv()'>Back</button>
+		</div>
+	</div>
+	<div id = 'generatedCodeDiv'>
+		<h4>Copy and paste this code into an HTML Widget:</h4>
+		<textarea id='generatedCodeBox' style="width: 90%;" readonly></textarea>
+		<br />
+		<br />
+		<button id='backprediv'  class='btn btn-info btn-small' onclick='backButtonCodeDiv()'>Back</button>
+		<button id='startover'  class='btn btn-info btn-small' onclick='startOver()'>Start Over</button>
+	</div> 
+	<div id="docTable" style="display: none;"></div>
+</div>
