@@ -33,12 +33,12 @@ Update Library Loader
 * Download a copy of the "Library Loader" file from your community.  Open it for editing.
 * Go back to the Content Lookup widget and search for "Menu Widget".  You should see the two library files you uploaded to your community above.
 * Find the search result for "Menu Widget Builder CSS Library" and copy its Content ID.  It should be a number like 694225.
-* Update the library_loader.js file line for "menu_widget_builder.css" and update the content ID variable (it should be 0 before updating) to the Content ID from step 4.  The result should look similar to:
+* Update the library_loader.js file line for "menu_widget_builder.css" and update the content ID variable (it should be 0 before updating) to the Content ID.  The result should look similar to:
 ```
 	libraries['menu_widget_builder.css'] = { contentID: '694225' };
 ```
 * Find the search result for "Menu Widget Builder JavaScript Library" and copy its Content ID.  It should be a number like 694226.
-* Update the library_loader.js file line for "menu_widget_builder.js" and update the content ID variable (it should be 0 before updating) to the Content ID from step 6.  The result should look similar to:
+* Update the library_loader.js file line for "menu_widget_builder.js" and update the content ID variable (it should be 0 before updating) to the Content ID.  The result should look similar to:
 ```
 	libraries['menu_widget_builder.js'] = { contentID: '694226' };
 ```
@@ -49,7 +49,7 @@ Update Library Loader
 	libraries['spectrum.css'] = { contentID: '694227' };
 ```
 * Find the search result for "Spectrum JavaScript Library" and copy its Content ID.  It should be a number like 694228.
-* Update the library_loader.js file line for "spectrum.js" and update the content ID variable (it should be 0 before updating) to the Content ID from step 10.  The result should look similar to:
+* Update the library_loader.js file line for "spectrum.js" and update the content ID variable (it should be 0 before updating) to the Content ID.  The result should look similar to:
 ```
 	libraries['spectrum.js'] = { contentID: '694228' };
 ```
@@ -62,7 +62,7 @@ Install the Menu Builder application
 ------------------------------------
 * Use the Content Lookup widget to search for "jQuery Library".  Copy the Content ID.  It should be a number like "694224"
 * Look in the Menu archive on your computer and edit the "menu_widget_builder.html" file.
-* Find the jquery_content_id and replace the zero in the quotes with the Content ID copied in step 1.  The result should look similar to:
+* Find the jquery_content_id and replace the zero in the quotes with the Content ID.  The result should look similar to:
 ```
 	var jquery_content_id = "694224";
 ```
@@ -75,13 +75,13 @@ Install the Menu Builder application
 ```
     <script src='JQUERY'></script>
 ```
-replace the text JQUERY with the URL you copied in step 4.  It should end up looking similar to:
+replace the text JQUERY with the Binary URL.  It should end up looking similar to:
 ```
     <script src='https://myjiveinstance.mycompany.com/api/core/v3/attachments/file/694224/data'></script>
 ```
 * Use the Content Lookup widget to search for "Library Loader".  Copy the Content ID.
 * Edit the "menu_widget_builder.html" file again.
-* Find the library_loader_content_id and replace the zero in the quotes with the Content ID copied in step 1.  The result should look similar to:
+* Find the library_loader_content_id and replace the zero in the quotes with the Content ID.  The result should look similar to:
 ```
 	var library_loader_content_id = "694223";
 ```
@@ -103,6 +103,7 @@ Creating a Menu Setup document
 * Create a bullet list of items that will make up the top level menu items.  Any top level menu item that will not have a sub-menu should be made into a hyperlink to the destination page when that menu item is clicked.  Do not change any styling of this list, such as font size and color.  The builder application will allow changing the font size, and colors of the menu.
 * Any top level menu item that is going to have a sub-menu should NOT be a hyperlink.  Sub-menus are created by indenting the bullet list, and entering the sub-menu items.  Each of these sub-menu items must be a hyperlink to the destination for that item when clicked.
 <p><img src="docs/menu-widget-setup-doc.jpg" /></p>
+* Right aligning a top level menu item on the page will right-align top level menu items from there on.  See the example menu at the end of the next section to see what this does.
 * Once your menu setup document is completed, publish the document and copy the URL.
 
 Build the Menu
@@ -110,9 +111,9 @@ Build the Menu
 * Go to the Overview page that you installed the Menu Builder application.
 * Enter a title (displays at the very left of the menu), and paste the menu setup document URL you copied in the section above.
 * Click Next and the styling screen displays.  The example menu at the top defaults to the White color palette.
-<p><img src="docs/menu-widget-color.jpg" /></p>
+<p><img src="docs/menu-widget-colors.jpg" /></p>
 * Choose the color from the palette that most closely matches your desired menu color.  You can fine-tune the colors with the color selectors below the palette.
-<p><img src="docs/menu-widget-setup-doc.jpg" /></p>
+<p><img src="docs/menu-widget-fontsize.jpg" /></p>
 * Set the font sizes to the desired sizes.  You can set the sizes for the Title, top level menu items, an sub-menu items.
 * Once satisfied with your menu configuration, click Next.  This will generate the code for your menu.  Copy the generated code.
 * Go to the overview page you want to put the menu.
