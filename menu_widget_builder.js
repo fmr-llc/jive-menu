@@ -311,15 +311,15 @@ function createPreview(menuColor) {
 		"<li class='dropdown preview-menu-option'>" +
 		"<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Menu 1 <b class='caret'></b></a>" +
 		"<ul class='dropdown-menu' >" +
-		"<li><a href='#'' target='_blank'>Menu 1 - 1</a></li>" +
-		"<li><a href='#' target='_blank'>Menu 1 - 2</a></li>" +
+		"<li><a href='#'>Menu 1 - 1</a></li>" +
+		"<li><a href='#'>Menu 1 - 2</a></li>" +
 		"</ul>" +
 		"</li>" +
 		"<li class='dropdown preview-menu-option'>" +
 		"<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Menu 2 <b class='caret'></b></a>" +
 		"<ul class='dropdown-menu' >" +
-		"<li><a href='#' target='_blank'>Menu 2 - 1</a></li>" +
-		"<li><a href='#' target='_blank'>Menu 2 - 2</a></li>" +
+		"<li><a href='#'>Menu 2 - 1</a></li>" +
+		"<li><a href='#'>Menu 2 - 2</a></li>" +
 		"</ul>" +
 		"</li>" +
 		"<li class='dropdown preview-menu-option'>" +
@@ -358,10 +358,8 @@ function addCSSRule(sheet, selector, rules, index) {
 
 function deleteCSSRule(sheet, index) {
 	if("deleteRule" in sheet) {
-		console.log('delete');
 		sheet.deleteRule(index);
 	} else if("removeRule" in sheet) {
-		console.log('remove');
 		sheet.removeRule(index);
 	}
 }
@@ -618,7 +616,9 @@ function loadStatic() {
 				a = $j(this).find('a');
 				a.removeAttr("rel");
 				a.removeAttr("class");
-				a.attr('target', '_blank');
+				if ( $j('#newTab')[0].checked ) {
+					a.attr('target', '_blank');
+				}
 				tmpHTML += "            <li>" + $j(this).html() + "</li>\n";
 			});
 			tmpHTML +="          </ul>\n"
@@ -627,7 +627,9 @@ function loadStatic() {
 			a = $j(curElem).find("a");
 			a.removeAttr("rel");
 			a.removeAttr("class");
-			a.attr("target", "_blank");
+			if ( $j('#newTab')[0].checked ) {
+				a.attr("target", "_blank");
+			}
 			tmpHTML +="        <li>"
 					+ $j(curElem).html()
 					+ "</li>\n";
